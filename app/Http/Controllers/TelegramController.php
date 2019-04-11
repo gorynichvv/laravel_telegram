@@ -38,7 +38,7 @@ class TelegramController extends Controller
                 'text' => "Спасибо!"
             ]);
         }
-        elseif ($updates->message->isType('contact')){ // Получение контака
+        elseif ($updates->message->isType('contact') and TelegramUser::where('phone', $updates->message->contact->phone_number)->first() == false){ // Получение контака
 
             TelegramUser::insert([
                 [ 'user_id' => $updates->message->contact->user_id, 
